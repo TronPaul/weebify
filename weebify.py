@@ -7,7 +7,8 @@ SUBTITLES_AVOID_TEXT = ['lyrics', 'signs']
 
 
 def should_avoid_default_sub(mkv):
-    return any([any([avoid in s.name.lower() for avoid in SUBTITLES_AVOID_TEXT]) for s in mkv.subtitle_tracks if s.default])
+    return len(mkv.subtitle_tracks) > 1 and \
+           any([any([avoid in s.name.lower() for avoid in SUBTITLES_AVOID_TEXT]) for s in mkv.subtitle_tracks if s.default])
 
 
 def find_eng_sub(mkv):
