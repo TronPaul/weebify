@@ -4,7 +4,7 @@ import sys
 import subprocess
 
 
-def webify_mkv(mkv_path):
+def weebify_mkv(mkv_path):
     with open(mkv_path, 'rb') as fp:
         mkv = enzyme.MKV(fp)
 
@@ -41,7 +41,7 @@ def main():
     parser.add_argument("input_file")
 
     args = parser.parse_args()
-    webify_mkv(args.input_file)
+    weebify_mkv(args.input_file)
 
 if __name__ == '__main__':
     main()
