@@ -76,7 +76,7 @@ def main():
     parser.add_argument("input_file")
 
     args = parser.parse_args()
-    weebify_mkv(args.input_file)
+    weebify_mkv(args.input_file, args.noop)
 
 if __name__ == '__main__':
     main()
