@@ -15,6 +15,7 @@ def find_eng_sub(mkv):
 
 
 def weebify_mkv(mkv_path, noop=False):
+    print('Opening {}'.format(mkv_path), file=sys.stderr)
     with open(mkv_path, 'rb') as fp:
         mkv = enzyme.MKV(fp)
 
