@@ -11,7 +11,7 @@ def should_avoid_default_sub(mkv):
 
 
 def find_eng_sub(mkv):
-    return [s for s in mkv.subtitle_tracks if all([avoid not in s.name.lower for avoid in SUBTITLES_AVOID_TEXT])][0]
+    return [s for s in mkv.subtitle_tracks if all([avoid not in s.name.lower() for avoid in SUBTITLES_AVOID_TEXT])][0]
 
 
 def weebify_mkv(mkv_path, noop=False):
