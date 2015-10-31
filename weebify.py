@@ -44,9 +44,11 @@ def weebify_mkv(mkv_path, noop=False):
                 track_changes[track.number].append('flag-default=0')
 
     if not noop:
-        subprocess.check_call(['mkvpropedit', '-v', mkv_path, '-v'] + build_args(track_changes))
-    else:
-        print('Nothing to do', file=sys.stderr)
+        args = build_args(track_changes)
+        if args:
+            subprocess.check_call(['mkvpropedit', '-v', mkv_path, '-v'] + args)
+        else:
+            print('Nothing to do', file=sys.stderr)
 
 
 def build_args(track_changes):
