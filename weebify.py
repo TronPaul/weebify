@@ -7,11 +7,11 @@ SUBTITLES_AVOID_TEXT = ['lyrics', 'signs']
 
 
 def should_avoid_default_sub(mkv):
-    return any([any([avoid in s.lower() for avoid in SUBTITLES_AVOID_TEXT]) for s in mkv.subtitle_tracks])
+    return any([any([avoid in s.name.lower() for avoid in SUBTITLES_AVOID_TEXT]) for s in mkv.subtitle_tracks])
 
 
 def find_eng_sub(mkv):
-    return [s for s in mkv.subtitle_tracks if all([avoid not in s.lower for avoid in SUBTITLES_AVOID_TEXT])][0]
+    return [s for s in mkv.subtitle_tracks if all([avoid not in s.name.lower for avoid in SUBTITLES_AVOID_TEXT])][0]
 
 
 def weebify_mkv(mkv_path, noop=False):
