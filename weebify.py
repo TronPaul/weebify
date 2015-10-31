@@ -23,7 +23,7 @@ def weebify_mkv(mkv_path, noop=False):
     jpn_audio_track = find_jpn_audio_track(mkv)
     def_audio_track = find_default_audio_track(mkv)
     set_default_sub = should_avoid_default_sub(mkv)
-    set_default_audio = jpn_audio_track != def_audio_track
+    set_default_audio = jpn_audio_track and jpn_audio_track != def_audio_track
     track_changes = {track.number: [] for track in mkv.audio_tracks + mkv.subtitle_tracks}
     if set_default_audio:
         if noop:
