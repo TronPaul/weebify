@@ -45,12 +45,16 @@ def weebify_mkv(mkv_path, noop=False):
                     print('Would unflag subtitle track {} as default'.format(track.number))
                 track_changes[track.number].append('flag-default=0')
 
-    if not noop:
-        args = build_args(track_changes)
-        if args:
-            subprocess.check_call(['mkvpropedit', '-v', mkv_path, '-v'] + args)
+    args = build_args(track_changes)
+    if args:
+        if noop:
+            return 1
         else:
-            print('Nothing to do', file=sys.stderr)
+            subprocess.check_call(['mkvpropedit', '-v', mkv_path, '-v'] + args)
+            return 0
+    else:
+        print('Nothing to do', file=sys.stderr)
+        return 0
 
 
 def build_args(track_changes):
@@ -80,7 +84,7 @@ def main():
     parser.add_argument("input_file")
 
     args = parser.parse_args()
-    weebify_mkv(args.input_file, args.noop)
+    return weebify_mkv(args.input_file, args.noop)
 
 if __name__ == '__main__':
-    main()
+    exit(main())
