@@ -27,7 +27,7 @@ def weebify_mkv(mkv_path, noop=False):
     track_changes = {track.number: [] for track in mkv.audio_tracks + mkv.subtitle_tracks}
     if set_default_audio:
         if noop:
-            print('Would flag audio track {} as default'.format(jpn_audio_track.number))
+            print('Would flag audio track {} as default'.format(jpn_audio_track.number), file=sys.stderr)
         track_changes[jpn_audio_track.number].append('flag-default=1')
         for track in mkv.audio_tracks:
             if track != jpn_audio_track and track.default:
@@ -37,12 +37,12 @@ def weebify_mkv(mkv_path, noop=False):
     if set_default_sub:
         primary_eng_sub = find_eng_sub(mkv)
         if noop:
-            print('Would flag subtitle track {} as default'.format(primary_eng_sub.number))
+            print('Would flag subtitle track {} as default'.format(primary_eng_sub.number), file=sys.stderr)
         track_changes[primary_eng_sub.number].append('flag-default=1')
         for track in mkv.subtitle_tracks:
             if track != primary_eng_sub and track.default:
                 if noop:
-                    print('Would unflag subtitle track {} as default'.format(track.number))
+                    print('Would unflag subtitle track {} as default'.format(track.number), file=sys.stderr)
                 track_changes[track.number].append('flag-default=0')
 
     args = build_args(track_changes)
